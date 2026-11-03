@@ -9,6 +9,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = 'cloudpulse-react'
+        CONTAINER_NAME = 'cloudpulse-app'
         DOCKER = 'C:/Users/HAI/AppData/Local/Programs/DockerDesktop/resources/bin/docker.exe'
     }
 
@@ -37,6 +38,13 @@ pipeline {
             steps {
                 bat '"%DOCKER%" version'
                 bat '"%DOCKER%" build -t cloudpulse-react:latest .'
+            }
+        }
+
+        stage('Deploy Application') {
+            steps {
+                bat '"%DOCKER%" rm -f cloudpulse-app'
+                bat '"%DOCKER%" run -d --name cloudpulse-app -p 8081:80 cloudpulse-react:latest'
             }
         }
     }
