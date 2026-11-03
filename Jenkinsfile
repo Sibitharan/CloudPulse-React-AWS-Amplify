@@ -20,11 +20,13 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
-            steps {
-                bat 'npm ci'
-            }
-        }
+        stage('Build Docker Image') {
+    steps {
+        bat '"C:/Users/HAI/AppData/Local/Programs/DockerDesktop/resources/bin/docker.exe" version'
+
+        bat '"C:/Users/HAI/AppData/Local/Programs/DockerDesktop/resources/bin/docker.exe" build -t cloudpulse-react:latest .'
+    }
+}
 
         stage('Build React Application') {
             steps {
