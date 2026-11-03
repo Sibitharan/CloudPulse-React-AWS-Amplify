@@ -1,4 +1,5 @@
 
+
 pipeline {
     agent any
 
@@ -8,7 +9,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = 'cloudpulse-react'
-        CONTAINER_NAME = 'cloudpulse-app'
+        DOCKER = 'C:/Users/HAI/AppData/Local/Programs/DockerDesktop/resources/bin/docker.exe'
     }
 
     stages {
@@ -20,13 +21,11 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-    steps {
-        bat '"C:/Users/HAI/AppData/Local/Programs/DockerDesktop/resources/bin/docker.exe" version'
-
-        bat '"C:/Users/HAI/AppData/Local/Programs/DockerDesktop/resources/bin/docker.exe" build -t cloudpulse-react:latest .'
-    }
-}
+        stage('Install Dependencies') {
+            steps {
+                bat 'npm ci'
+            }
+        }
 
         stage('Build React Application') {
             steps {
@@ -36,7 +35,8 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t cloudpulse-react:latest .'
+                bat '"%DOCKER%" version'
+                bat '"%DOCKER%" build -t cloudpulse-react:latest .'
             }
         }
     }
