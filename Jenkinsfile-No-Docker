@@ -1,0 +1,50 @@
+
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'NodeJS'
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                bat 'npm ci'
+            }
+        }
+
+        stage('Build React Application') {
+            steps {
+                bat 'npm run build'
+            }
+        }
+
+        stage('Deploy Application') {
+            steps {
+                bat '''
+                    if not exist C:\\CloudPulse-Deploy mkdir C:\\CloudPulse-Deploy
+                    robocopy dist C:\\CloudPulse-Deploy /MIR
+                    if %ERRORLEVEL% LEQ 7 exit /b 0
+                    exit /b %ERRORLEVEL%
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'CloudPulse deployed successfully without Docker!'
+        }
+
+        failure {
+            echo 'CloudPulse deployment failed. Check Console Output.'
+        }
+    }
+}
