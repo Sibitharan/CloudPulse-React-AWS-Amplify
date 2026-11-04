@@ -58,7 +58,7 @@ function App() {
       </header>
 
       <div className="content">
-        <section className="page-heading"><div><div className="eyebrow">MONITORING CENTER <span>•</span> PRODUCTION</div><h1>{active === 'Overview' ? 'Welcome to CloudPulse' : active}</h1><p>Here’s what’s happening across your cloud infrastructure.</p></div><button className="date-select" onClick={() => setRange(range === 'Last 24 hours' ? 'Last 7 days' : 'Last 24 hours')}>{range}<ChevronDown size={15}/></button></section>
+        <section className="page-heading"><div><div className="eyebrow">MONITORING CENTER <span>•</span> PRODUCTION</div><h1>{active === 'Overview' ? 'Welcome to CloudPulse by Sibitharan' : active}</h1><p>Here’s what’s happening across your cloud infrastructure.</p></div><button className="date-select" onClick={() => setRange(range === 'Last 24 hours' ? 'Last 7 days' : 'Last 24 hours')}>{range}<ChevronDown size={15}/></button></section>
 
         <section className="metrics-grid">
           <Metric icon={Cloud} label="Active services" value="12" change="+2 this month" tone="purple"/>
