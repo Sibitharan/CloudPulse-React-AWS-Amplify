@@ -41,3 +41,5 @@ Vite creates the deployable website in the `dist/` folder.
 - The included Amplify build configuration uses `npm install`, so you can deploy without a committed package-lock file. For reproducible builds, run `npm install` locally and commit the generated `package-lock.json`.
 - All metrics, services and activity events are sample data. The dashboard does not connect to AWS APIs yet.
 - To connect real AWS services later, add a backend/API and keep credentials out of frontend code.
+
+No-Docker Jenkins deployment test
